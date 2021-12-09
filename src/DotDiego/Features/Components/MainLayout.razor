@@ -1,10 +1,32 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="container">
-    <NavMenu />
-    <main>
-        <article class="">
-            @Body
-        </article>
-    </main>
+<div class="flex flex-col h-screen @(_darkMode ? "dark" : "")">
+    <div class="bg-gray-200">
+        <div class="container mx-auto">
+            <NavMenu OnDarkModeToggled="@HandleDarkModeToggled" />
+            <main>
+                <article class="">
+                    @Body
+                </article>
+            </main>
+
+            <footer class="flex flex-wrap items-center md:justify-between justify-center">
+                <div class="w-full md:w-4/12 px-4 mx-auto text-center text-black">
+                    <div>@DateTime.Today.Year - Dot Diego</div>
+                    <div>a tech blog powered by Blazor</div>
+                </div>
+            </footer>
+        </div>
+    </div>
 </div>
+
+
+@code
+{
+    private bool _darkMode = false;
+
+    private void HandleDarkModeToggled(bool isDarkMode)
+    {
+        _darkMode = isDarkMode;
+    }
+}
